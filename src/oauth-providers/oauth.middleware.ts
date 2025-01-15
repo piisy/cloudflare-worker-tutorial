@@ -135,7 +135,9 @@ app.get('auth/by-ticket', async (ctx) => {
   if (!token) {
     throw new HTTPException(404)
   }
+  const user = await authService.verifyJwt(token)
   return ctx.json({
     token,
+    user,
   })
 })
